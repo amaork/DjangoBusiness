@@ -21,10 +21,10 @@ class Project(models.Model):
     name = models.CharField('项目名称', max_length=16)
     email = models.EmailField('邮箱', default='')
     wechat = models.CharField('微信', max_length=16,  default='')
-    wechar_qr_code = models.ForeignKey('Document', help_text='微信二维码', related_name='wechat')
+    qr_code = models.ForeignKey('Document', help_text='微信二维码', related_name='wechat')
     phone = models.CharField('联系电话', max_length=64, default='')
     address = models.CharField('联系地址', max_length=128, default='')
-    logo = models.ForeignKey('Document', help_text='项目图标', related_name='logo')
+    cover = models.ForeignKey('Document', help_text='项目图标', related_name='cover')
     unique = models.CharField('锁定', max_length=1, default='U', unique=True)
 
     def __str__(self):
@@ -32,7 +32,17 @@ class Project(models.Model):
 
 
 class Document(models.Model):
+    name = models.CharField(max_length=32)
     docfile = models.FileField(upload_to="documents/%Y/%m/%d")
+
+    def __str__(self):
+        return self.name
+
+    def url(self):
+        return self.docfile.url
+
+    def file_path(self):
+        return self.docfile.name
 
 
 class BaseArticle(models.Model):
@@ -78,6 +88,8 @@ class NavigationItem(models.Model):
 class ArticleItem(BaseArticle):
     MAX_ITEM = 3
     SEQ_CHOICES = get_sequence_choice(MAX_ITEM)
+
+    title2 = models.CharField('副标题', max_length=64, blank=True, null=True)
 
     # 显示顺序
     sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES, unique=True)

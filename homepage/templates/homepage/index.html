@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>{{ name }}</title>
+    <title>{{ site.name }}</title>
 
     <!-- Bootstrap core CSS -->
     <!--<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">-->
@@ -47,7 +47,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">{{ name }}</a>
+              <a class="navbar-brand" href="#">{{ site.name }}</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
@@ -55,18 +55,6 @@
                 {% for item in navis %}
                   <li><a href="{{ item.url }}">{{ item.text }}</a></li>
                 {% endfor %}
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
               </ul>
             </div>
           </div>
@@ -81,7 +69,7 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img class="first-slide" src="{% static 'images/slide1.jpg'%}" alt="First slide">
+          <img class="first-slide" src="{{ site.cover.url }}" alt="First slide">
         </div>
       </div>
       <!--</a>-->
@@ -98,10 +86,10 @@
       <div class="row">
         {% for item in headers %}
           <div class="col-lg-4">
-          <img class="img-circle" src="{{ item.cover.docfile.url }}" alt="Generic placeholder image" width="140" height="140">
+          <img class="img-circle" src="{{ item.cover.url }}" alt="Generic placeholder image" width="140" height="140">
           <h2>{{ item.title }}</h2>
           <p>{{ item.abstract }}</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         {% endfor %}
       </div><!-- /.row -->
@@ -116,12 +104,12 @@
 
         <div class="row featurette">
           <div class="col-md-7">
-            <h2 class="featurette-heading">{{ article.title }}<span class="text-muted">{{ article.sequence }}</span></h2>
+            <h2 class="featurette-heading">{{ article.title }}<span class="text-muted">{{ article.title2 }}</span></h2>
             <p class="lead">{{ article.abstract }}</p>
           </div>
 
           <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" src="{{ article.cover.docfile.url }}" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" src="{{ article.cover.url }}" alt="Generic placeholder image">
           </div>
         </div>
 
@@ -129,12 +117,12 @@
 
         <div class="row featurette">
           <div class="col-md-7 col-md-push-5">
-            <h2 class="featurette-heading">{{ article.title }}<span class="text-muted">{{ article.sequence }}</span></h2>
+            <h2 class="featurette-heading">{{ article.title }}<span class="text-muted">{{ article.title2 }}</span></h2>
             <p class="lead">{{ article.abstract }}</p>
           </div>
 
           <div class="col-md-5 col-md-pull-7">
-            <img class="featurette-image img-responsive center-block" src="{{ article.cover.docfile.url }}" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" src="{{ article.cover.url }}" alt="Generic placeholder image">
           </div>
         </div>
 
@@ -149,8 +137,8 @@
 
       <!-- FOOTER -->
       <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p class="pull-right"><a href="#">回到顶部</a></p>
+        <p>&copy; 2016 {{ site.name }}. &middot; 联系电话: {{ site.phone }}, 地址: {{ site.address }}, 微信: {{ site.wechat }}</p>
       </footer>
 
     </div><!-- /.container -->
