@@ -95,6 +95,7 @@ ENV/
 *.sqlite3
 
 # Static file
+/media
 *.jpg*
 *.png
 *.gif

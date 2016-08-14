@@ -24,7 +24,8 @@ class Project(models.Model):
     qr_code = models.ForeignKey('Document', help_text='微信二维码', related_name='wechat')
     phone = models.CharField('联系电话', max_length=64, default='')
     address = models.CharField('联系地址', max_length=128, default='')
-    cover = models.ForeignKey('Document', help_text='项目图标', related_name='cover')
+    cover = models.ForeignKey('Document', help_text='项目封面', related_name='cover')
+    logo = models.ForeignKey('Document', help_text='项目图标', related_name='logo')
     unique = models.CharField('锁定', max_length=1, default='U', unique=True)
 
     def __str__(self):

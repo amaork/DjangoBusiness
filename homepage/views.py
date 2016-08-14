@@ -33,8 +33,8 @@ def file_list(request):
 
 def homepage(request):
     site = get_object_or_404(Project)
-    navis = get_list_or_404(NavigationItem)
-    headers = get_list_or_404(HeaderItem)
-    articles = get_list_or_404(ArticleItem)
+    navis = NavigationItem.objects.all()
+    headers = HeaderItem.objects.all()
+    articles = ArticleItem.objects.all()
     context = {'site': site, 'navis': navis, 'headers': headers, 'articles': articles}
     return render(request, 'homepage/index.html', context)
