@@ -10,10 +10,10 @@ from .forms import DocumentForm
 from .models import *
 
 
-__all__ = ['file_list', 'IndexView']
+__all__ = ['document_upload', 'IndexView']
 
 
-def file_list(request):
+def document_upload(request):
     # Handle file upload
     if request.mothod == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -22,13 +22,7 @@ def file_list(request):
             newdoc.save()
 
             # Redirect to document list after post
-            return HttpResponseRedirect(reverse('file_list'))
-    else:
-        form = DocumentForm()
-
-    # Load documents form list page
-    documents = Document.objects.all()
-    return render(request, 'file_list.html', {"documents": documents, "form": form})
+            return HttpResponseRedirect(reverse('document_upload'))
 
 
 def homepage(request):
@@ -36,5 +30,17 @@ def homepage(request):
     navis = NavigationItem.objects.all()
     headers = HeaderItem.objects.all()
     articles = ArticleItem.objects.all()
-    context = {'site': site, 'navis': navis, 'headers': headers, 'articles': articles}
+    context = {
+        'site': site,
+        'navis': navis,
+        'headers': headers,
+        'articles': articles,
+        'location': 'homepage'}
     return render(request, 'homepage/index.html', context)
+
+
+def about(request):
+    site = get_object_or_404(Project)
+    navis = NavigationItem.objects.all()
+    context = {'site': site, 'navis': navis, 'location': 'about'}
+    return render(request, 'homepage/about.html', context)
