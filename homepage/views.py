@@ -27,7 +27,7 @@ def document_upload(request):
 
 def homepage(request):
     site = get_object_or_404(Project)
-    navis = NavigationItem.objects.all()
+    navis = NavigationBar.objects.all()
     headers = HeaderItem.objects.all()
     articles = ArticleItem.objects.all()
     context = {
@@ -41,6 +41,6 @@ def homepage(request):
 
 def about(request):
     site = get_object_or_404(Project)
-    navis = NavigationItem.objects.all()
+    navis = NavigationBar.objects.all()
     context = {'site': site, 'navis': navis, 'location': 'about'}
     return render(request, 'homepage/about.html', context)
