@@ -51,7 +51,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'yuejuanwenxiu.urls'
+ROOT_URLCONF = 'sites.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'yuejuanwenxiu.wsgi.application'
+WSGI_APPLICATION = 'sites.wsgi.application'
 
 
 # Database
