@@ -2,7 +2,7 @@
 {% block content %}
  <!-- Three columns of text below the carousel -->
       <div class="row">
-        {% for item in headers %}
+        {% for item in horizontal_list %}
           <div class="col-lg-4">
           <img class="img-circle" src="{{ item.cover.url }}" alt="Generic placeholder image" width="140" height="140">
           <h2>{{ item.title }}</h2>
@@ -16,7 +16,7 @@
 
       <hr class="featurette-divider">
 
-      {% for article in articles %}
+      {% for article in vertical_list %}
         {% if article.sequence|divisibleby:2 == 1 %}
 
         <div class="row featurette">

@@ -4,7 +4,7 @@ from django.db import models
 import string
 
 
-__all__ = ['Project', 'Document', 'HeaderItem', 'ArticleItem', 'NavigationBar']
+__all__ = ['Project', 'Document', 'HorizontalItem', 'VerticalItem', 'NavigationBar']
 
 
 def get_sequence_choice(size):
@@ -46,13 +46,13 @@ class Project(models.Model):
         :param kwargs:
         :return:
         """
-        homepage = NavigationBar(text='主页', url=self.HOMEPAGE_URL, sequence=1)
+        homepage = NavigationBar(text='主页', url=self.HOMEPAGE_URL, sequence=0)
         homepage.save()
 
-        about = NavigationBar(text='关于', url=self.ABOUT_URL, sequence=2)
+        about = NavigationBar(text='关于', url=self.ABOUT_URL, sequence=1)
         about.save()
 
-        contact = NavigationBar(text='联系我们', url=self.CONTACT_US_URL, sequence=3)
+        contact = NavigationBar(text='联系我们', url=self.CONTACT_US_URL, sequence=2)
         contact.save()
 
         super(Project, self).save(*args, **kwargs)
@@ -75,51 +75,46 @@ class Document(models.Model):
         return self.docfile.name
 
 
-class BaseArticle(models.Model):
-    # 标题
+class BasicItem(models.Model):
     title = models.CharField('标题', max_length=64)
-
-    # 概要
-    abstract = models.CharField('摘要', max_length=128)
-
-    # 详细内容
-    context = models.TextField('正文', help_text='文章的正文内容')
+    abstract = models.CharField('摘要', max_length=256)
 
     def __str__(self):
         return self.title
 
 
-class HeaderItem(BaseArticle):
-    MAX_ITEM = 3
-    SEQ_CHOICES = get_sequence_choice(MAX_ITEM)
-
-    # 显示顺序
-    sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES, unique=True)
-
-    # 图标
-    cover = models.ForeignKey('Document', help_text='文章的封面图标')
-
-
-class NavigationBar(models.Model):
-    MAX_ITEM = 5
-    SEQ_CHOICES = get_sequence_choice(MAX_ITEM)
-
-    text = models.CharField("名称", max_length=16)
-    url = models.CharField("链接地址", max_length=64)
-    sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES, unique=True)
-
-    def __str__(self):
-        return self.text
-
-
-class ArticleItem(BaseArticle):
+class VerticalItem(BasicItem):
     MAX_ITEM = 3
     SEQ_CHOICES = get_sequence_choice(MAX_ITEM)
 
     title2 = models.CharField('副标题', max_length=64, blank=True, null=True)
-
-    # 显示顺序
-    sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES, unique=True)
-
-    # 图标
+    sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES)
     cover = models.ForeignKey('Document', help_text='文章的封面图标')
+
+
+class HorizontalItem(BasicItem):
+    """
+    主页横向排列的条目
+    """
+    MAX_ITEM = 3
+    SEQ_CHOICES = get_sequence_choice(MAX_ITEM)
+
+    context = models.TextField('正文', help_text='文章的正文内容')
+    sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES)
+    cover = models.ForeignKey('Document', help_text='文章的封面图标')
+
+
+class NavigationBar(models.Model):
+    """
+    主页导航栏
+    """
+    MAX_ITEM = 5
+    SEQ_CHOICES = get_sequence_choice(MAX_ITEM)
+
+    text = models.CharField("名称", max_length=16)
+    url = models.CharField("地址", max_length=64)
+    sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES)
+
+    def __str__(self):
+        return self.text
+

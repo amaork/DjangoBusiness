@@ -27,20 +27,22 @@ def document_upload(request):
 
 def homepage(request):
     site = get_object_or_404(Project)
-    navis = NavigationBar.objects.all()
-    headers = HeaderItem.objects.all()
-    articles = ArticleItem.objects.all()
+    vertical_list = VerticalItem.objects.all().order_by('sequence')
+    horizontal_list = HorizontalItem.objects.all().order_by('sequence')
+    navigation_list = NavigationBar.objects.all().order_by('sequence')
     context = {
         'site': site,
-        'navis': navis,
-        'headers': headers,
-        'articles': articles,
-        'location': 'homepage'}
+        'location': 'homepage',
+        'vertical_list': vertical_list,
+        'navigation_list': navigation_list,
+        'horizontal_list': horizontal_list,
+    }
+
     return render(request, 'homepage/index.html', context)
 
 
 def about(request):
     site = get_object_or_404(Project)
-    navis = NavigationBar.objects.all()
-    context = {'site': site, 'navis': navis, 'location': 'about'}
+    navigation_list = NavigationBar.objects.all()
+    context = {'site': site, 'navigation_list': navigation_list, 'location': 'about'}
     return render(request, 'homepage/about.html', context)
