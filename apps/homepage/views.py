@@ -2,8 +2,6 @@
 from django.shortcuts import get_list_or_404, render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from django.template import loader
-from django.views import generic
 
 
 from .forms import DocumentForm
@@ -39,10 +37,3 @@ def homepage(request):
     }
 
     return render(request, 'homepage/index.html', context)
-
-
-def about(request):
-    site = get_object_or_404(Project)
-    navigation_list = NavigationBar.objects.all()
-    context = {'site': site, 'navigation_list': navigation_list, 'location': 'about'}
-    return render(request, 'homepage/about.html', context)

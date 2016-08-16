@@ -27,11 +27,9 @@ class Project(models.Model):
     weibo = models.CharField('微薄', max_length=32, default='')
     wechat = models.CharField('微信', max_length=16,  default='')
     address = models.CharField('地址', max_length=128, default='')
-    about_us = models.TextField('简介 ', max_length=4096, default='')
 
     qr_code = models.ForeignKey('Document', help_text='微信二维码', related_name='wechat')
     cover = models.ForeignKey('Document', help_text='主页封面', related_name='cover')
-    logo = models.ForeignKey('Document', help_text='公司 LOGO', related_name='logo')
     ico = models.ForeignKey('Document', help_text='浏览器 ICO', related_name='ico')
 
     def __str__(self):
