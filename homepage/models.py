@@ -4,10 +4,10 @@ from django.db import models
 import string
 
 
-__all__ = ['Project', 'Document', 'HorizontalItem', 'VerticalItem', 'NavigationBar']
+__all__ = ['Project', 'Document', 'HorizontalItem', 'VerticalItem', 'NavigationBar', 'get_sequence_choices']
 
 
-def get_sequence_choice(size):
+def get_sequence_choices(size):
     if size > len(string.digits):
         size = len(string.digits)
 
@@ -85,7 +85,7 @@ class BasicItem(models.Model):
 
 class VerticalItem(BasicItem):
     MAX_ITEM = 3
-    SEQ_CHOICES = get_sequence_choice(MAX_ITEM)
+    SEQ_CHOICES = get_sequence_choices(MAX_ITEM)
 
     title2 = models.CharField('副标题', max_length=64, blank=True, null=True)
     sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES)
@@ -97,7 +97,7 @@ class HorizontalItem(BasicItem):
     主页横向排列的条目
     """
     MAX_ITEM = 3
-    SEQ_CHOICES = get_sequence_choice(MAX_ITEM)
+    SEQ_CHOICES = get_sequence_choices(MAX_ITEM)
 
     context = models.TextField('正文', help_text='文章的正文内容')
     sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES)
@@ -109,7 +109,7 @@ class NavigationBar(models.Model):
     主页导航栏
     """
     MAX_ITEM = 5
-    SEQ_CHOICES = get_sequence_choice(MAX_ITEM)
+    SEQ_CHOICES = get_sequence_choices(MAX_ITEM)
 
     text = models.CharField("名称", max_length=16)
     url = models.CharField("地址", max_length=64)
