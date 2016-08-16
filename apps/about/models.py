@@ -2,10 +2,10 @@
 from __future__ import unicode_literals
 from django.db import models
 
-from ..homepage.models import NavigationBar, Document
+from ..core.models import Document, NavigationBar
 
 
-class AboutUs(models.Model):
+class CompanyInfo(models.Model):
     URL = 'about'
 
     name = models.CharField('公司名称', max_length=32)
@@ -25,6 +25,6 @@ class AboutUs(models.Model):
             if item.url == self.URL:
                 break
         else:
-            NavigationBar.objects.create(text='关于', url=self.URL, sequence=0)
+            NavigationBar.objects.create(text='关于', url=self.URL, sequence=1)
 
-        super(AboutUs, self).save(*args, **kwargs)
+        super(CompanyInfo, self).save(*args, **kwargs)

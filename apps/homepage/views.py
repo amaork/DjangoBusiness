@@ -1,26 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import get_list_or_404, render, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
+from django.shortcuts import render, get_object_or_404
 
 
-from .forms import DocumentForm
-from .models import *
-
-
-__all__ = ['document_upload', 'IndexView']
-
-
-def document_upload(request):
-    # Handle file upload
-    if request.mothod == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_vaild():
-            newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc.save()
-
-            # Redirect to document list after post
-            return HttpResponseRedirect(reverse('document_upload'))
+from ..core.models import Project, NavigationBar
+from .models import HorizontalItem, VerticalItem
 
 
 def homepage(request):

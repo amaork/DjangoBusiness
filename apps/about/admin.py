@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from django.contrib import admin, messages
+from django.contrib import admin
 
-from ..homepage.admin import OrderedModelAdmin
+from ..core.admin import LimitInstanceAdmin
 from .models import *
 
 
-class AboutUsAdmin(OrderedModelAdmin):
+class CompanyInfoAdmin(LimitInstanceAdmin):
     limit = 1
     list_display = ['name']
 
 
-admin.site.register(AboutUs, AboutUsAdmin)
+admin.site.register(CompanyInfo, CompanyInfoAdmin)
