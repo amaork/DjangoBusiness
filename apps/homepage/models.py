@@ -18,7 +18,6 @@ class Project(models.Model):
     """
     核心 Model 首先需要创建一个 Project
     """
-    ABOUT_URL = 'about'
     HOMEPAGE_URL = 'homepage'
 
     name = models.CharField('名称', max_length=16)
@@ -39,7 +38,7 @@ class Project(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        """保存 Project model instance 的时候自动创建 homepage, about, contact_us 导航条
+        """保存 Project model instance 的时候自动创建 homepage 导航栏目
 
         :param args:
         :param kwargs:
@@ -51,13 +50,6 @@ class Project(models.Model):
                 break
         else:
             NavigationBar.objects.create(text='主页', url=self.HOMEPAGE_URL, sequence=0)
-
-        # 创建 Project 的时候自动创建关于导航
-        for item in NavigationBar.objects.all():
-            if item.url == self.ABOUT_URL:
-                break
-        else:
-            NavigationBar.objects.create(text='关于', url=self.ABOUT_URL, sequence=1)
 
         super(Project, self).save(*args, **kwargs)
 

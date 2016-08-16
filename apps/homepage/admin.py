@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin, messages
-
 from .models import *
+
+__all__ = ['OrderedModelAdmin']
 
 
 class OrderedModelAdmin(admin.ModelAdmin):
