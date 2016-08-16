@@ -20,7 +20,6 @@ class Project(models.Model):
     """
     ABOUT_URL = 'about'
     HOMEPAGE_URL = 'homepage'
-    CONTACT_US_URL = 'contact_us'
 
     name = models.CharField('名称', max_length=16)
     phone = models.CharField('电话', max_length=64, default='')
@@ -46,14 +45,19 @@ class Project(models.Model):
         :param kwargs:
         :return:
         """
-        homepage = NavigationBar(text='主页', url=self.HOMEPAGE_URL, sequence=0)
-        homepage.save()
+        # 创建 Project 的时候自动创建主页导航
+        for item in NavigationBar.objects.all():
+            if item.url == self.HOMEPAGE_URL:
+                break
+        else:
+            NavigationBar.objects.create(text='主页', url=self.HOMEPAGE_URL, sequence=0)
 
-        about = NavigationBar(text='关于', url=self.ABOUT_URL, sequence=1)
-        about.save()
-
-        contact = NavigationBar(text='联系我们', url=self.CONTACT_US_URL, sequence=2)
-        contact.save()
+        # 创建 Project 的时候自动创建关于导航
+        for item in NavigationBar.objects.all():
+            if item.url == self.ABOUT_URL:
+                break
+        else:
+            NavigationBar.objects.create(text='关于', url=self.ABOUT_URL, sequence=1)
 
         super(Project, self).save(*args, **kwargs)
 
@@ -77,7 +81,7 @@ class Document(models.Model):
 
 class BasicItem(models.Model):
     title = models.CharField('标题', max_length=64)
-    abstract = models.CharField('摘要', max_length=256)
+    abstract = models.TextField('摘要', max_length=1024)
 
     def __str__(self):
         return self.title

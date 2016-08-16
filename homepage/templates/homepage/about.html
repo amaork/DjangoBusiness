@@ -1,4 +1,7 @@
 {% extends 'homepage/base.html' %}
 {% block content %}
-<h1>关于我们</h1>
+<div class="jumbotron text-center">
+  <h1>{{ site.name }}</h1>
+  <p>{{ site.about_us }}</p>
+</div>
 {% endblock content %}
