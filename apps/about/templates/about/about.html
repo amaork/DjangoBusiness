@@ -75,23 +75,33 @@
       <p><span class="glyphicon glyphicon-qrcode"></span> {{ contact.wechat }}</p>
     </div>
     <div class="col-sm-5">
-      <div class="row">
-        <div class="col-sm-4 form-group">
-          <input class="form-control" id="name" name="name" placeholder="名字" type="text" required>
-        </div>
-        <div class="col-sm-4 form-group">
-          <input class="form-control" id="phone" name="phone" placeholder="电话" type="text" required>
-        </div>
-        <div class="col-sm-4 form-group">
-          <input class="form-control" id="wechat" name="wechat" placeholder="微信" type="text" required>
-        </div>
+      <form action="/{{ form.action }}"  method="post">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+        <div class="row">
+            <div class="col-sm-4 form-group">
+                {{ form.name.errors }}
+                {{ form.name }}
+            </div>
+            <div class="col-sm-4 form-group">
+                {{ form.phone.errors }}
+                {{ form.phone }}
+            </div>
+            <div class="col-sm-4 form-group">
+                {{ form.wechat.errors }}
+                {{ form.wechat }}
+            </div>
       </div>
-      <textarea class="form-control" id="comments" name="comments" placeholder="留言" rows="5"></textarea><br>
+
+       {{ form.comment.errors }}
+       {{ form.comment }}
+       <br>
       <div class="row">
-        <div class="col-sm-12 form-group">
-          <button class="btn btn-default pull-right" type="submit">发送</button>
-        </div>
+          <div class="col-sm-12 form-group">
+            <button class="btn btn-default pull-right" type="submit">发送</button>
+            </div>
       </div>
+      </form>
     </div>
   </div>
 </div>
