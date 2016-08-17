@@ -11,8 +11,10 @@
 }
 
 .logo {
+    color: #f4511e;
     font-size: 200px;
 }
+
 @media screen and (max-width: 768px) {
     .col-sm-4 {
         text-align: center;
@@ -46,46 +48,53 @@
   </div>
 </div>
 
-<!--<div class="container-fluid text-center">-->
-  <!--<h2>SERVICES</h2>-->
-  <!--<h4>What we offer</h4>-->
-  <!--<br>-->
-  <!--<div class="row">-->
-    <!--<div class="col-sm-4">-->
-      <!--<span class="glyphicon glyphicon-off"></span>-->
-      <!--<h4>POWER</h4>-->
-      <!--<p>Lorem ipsum dolor sit amet..</p>-->
-    <!--</div>-->
-    <!--<div class="col-sm-4">-->
-      <!--<span class="glyphicon glyphicon-heart"></span>-->
-      <!--<h4>LOVE</h4>-->
-      <!--<p>Lorem ipsum dolor sit amet..</p>-->
-    <!--</div>-->
-    <!--<div class="col-sm-4">-->
-      <!--<span class="glyphicon glyphicon-lock"></span>-->
-      <!--<h4>JOB DONE</h4>-->
-      <!--<p>Lorem ipsum dolor sit amet..</p>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<br><br>-->
-  <!--<div class="row">-->
-    <!--<div class="col-sm-4">-->
-      <!--<span class="glyphicon glyphicon-leaf"></span>-->
-      <!--<h4>GREEN</h4>-->
-      <!--<p>Lorem ipsum dolor sit amet..</p>-->
-    <!--</div>-->
-    <!--<div class="col-sm-4">-->
-      <!--<span class="glyphicon glyphicon-certificate"></span>-->
-      <!--<h4>CERTIFIED</h4>-->
-      <!--<p>Lorem ipsum dolor sit amet..</p>-->
-    <!--</div>-->
-    <!--<div class="col-sm-4">-->
-      <!--<span class="glyphicon glyphicon-wrench"></span>-->
-      <!--<h4>HARD WORK</h4>-->
-      <!--<p>Lorem ipsum dolor sit amet..</p>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8">
+        <h1>客户对我们的评价</h1>
+        <p class="lead">{{ about_us.comment }}</p>
+    </div>
+    <div class="col-lg-4">
+      <span class="glyphicon glyphicon-user logo"></span>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-grey">
+  <h1 class="text-center">联系我们</h1>
+  <hr class="featurette-divider">
+  <div class="row">
+    <div class="col-sm-3">
+      <img class="featurette-image img-responsive center-block" height="170" width="170" src="{{ contact.qr_code.url }}" />
+    </div>
+    <div class="col-sm-4">
+      <p>联系我们，我们会在 24 小时之内联系您。</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> {{ contact.address }}</p>
+      <p><span class="glyphicon glyphicon-phone"></span> {{ contact.phone }}</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> {{ contact.email }}</p>
+      <p><span class="glyphicon glyphicon-qrcode"></span> {{ contact.wechat }}</p>
+    </div>
+    <div class="col-sm-5">
+      <div class="row">
+        <div class="col-sm-4 form-group">
+          <input class="form-control" id="name" name="name" placeholder="名字" type="text" required>
+        </div>
+        <div class="col-sm-4 form-group">
+          <input class="form-control" id="phone" name="phone" placeholder="电话" type="text" required>
+        </div>
+        <div class="col-sm-4 form-group">
+          <input class="form-control" id="wechat" name="wechat" placeholder="微信" type="text" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="留言" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-default pull-right" type="submit">发送</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <hr class="featurette-divider">
 {% endblock content %}

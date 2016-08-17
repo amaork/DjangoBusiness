@@ -81,7 +81,7 @@ class NavigationBarAdmin(OrderedModelAdmin):
 
 
 class ProjectAdmin(LimitInstanceAdmin):
-    list_display = ('name', 'wechat', 'phone', 'address')
+    list_display = ('name', 'phone', 'address')
 
 
 class DocumentAdmin(admin.ModelAdmin):

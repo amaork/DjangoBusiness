@@ -10,4 +10,10 @@ class CompanyInfoAdmin(LimitInstanceAdmin):
     list_display = ['name']
 
 
+class ContactInfoAdmin(LimitInstanceAdmin):
+    limit = 1
+    list_display = ['name', 'wechat', 'phone', 'email', 'address']
+
+
 admin.site.register(CompanyInfo, CompanyInfoAdmin)
+admin.site.register(ContactInfo, ContactInfoAdmin)
