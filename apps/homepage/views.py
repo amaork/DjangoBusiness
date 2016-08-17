@@ -13,7 +13,7 @@ def homepage(request):
     navigation_list = NavigationBar.objects.all().order_by('sequence')
     context = {
         'site': site,
-        'location': 'homepage',
+        'location': Project.url,
         'vertical_list': vertical_list,
         'navigation_list': navigation_list,
         'horizontal_list': horizontal_list,

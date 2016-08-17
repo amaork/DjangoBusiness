@@ -34,7 +34,7 @@ class Project(NavigationModel):
     核心 Model 首先需要创建一个 Project Instance，成功保存之后将自动完成一下动作：
     1. 创建 core.CompanyInfo 保存名称信息
     2. 创建 core.ContactInfo 保存电话与地址信息
-    3. 创建 主页和关于页面的导航栏(NavigationBar)
+    3. 创建 主页、关于、联系我们等基本的导航栏(NavigationBar)
     """
     text = "主页"
     sequence = 0

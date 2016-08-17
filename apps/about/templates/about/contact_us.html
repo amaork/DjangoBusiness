@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .jumbotron {
+        background-color: #fffff; /* Orange */
+        <!--color: #ffffff;-->
+    }
+    .container-fluid {
+    padding: 60px 50px;
+    }
+
+    .bg-grey {
+    background-color: #f6f6f6;
+    }
+
+    .logo {
+    color: #f4511e;
+    font-size: 200px;
+    }
+
+    @media screen and (max-width: 768px) {
+    .col-sm-4 {
+    text-align: center;
+    margin: 25px 0;
+    }
+    }
+</style>
+
+ <div class="jumbotron text-center" >
+     <h1>联系我们</h1>
+     <p>我们会在 24 小时之内联系您,让您满意是我们的宗旨</p>
+ </div>
+
+<div class="container-fluid bg-grey">
+    <div class="row">
+        <div class="col-sm-3">
+            <img class="featurette-image img-responsive center-block" height="165" width="165" src="{{ contact.qr_code.url }}" />
+        </div>
+        <div class="col-sm-4">
+            <p><span class="glyphicon glyphicon-map-marker"></span> {{ contact.address }}</p>
+            <p><span class="glyphicon glyphicon-phone"></span> {{ contact.phone }}</p>
+            <p><span class="glyphicon glyphicon-envelope"></span> {{ contact.email }}</p>
+            <p><span class="glyphicon glyphicon-qrcode"></span> {{ contact.wechat }}</p>
+        </div>
+        <div class="col-sm-5">
+            <form action="{{ form.action }}"  method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <!--{{ form.name.errors }}-->
+                        {{ form.name }}
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <!--{{ form.phone.errors }}-->
+                        {{ form.phone }}
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <!--{{ form.wechat.errors }}-->
+                        {{ form.wechat }}
+                    </div>
+                </div>
+                <!--{{ form.comment.errors }}-->
+                {{ form.comment }}
+                <br>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <button class="btn btn-default pull-right" type="submit">发送</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- 留言提交成功, 后台会发出 info message -->
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'info' %}
+                        <div class="col-sm-12 alert alert-success">
+                             <strong>{{ message }}</strong>
+                        </div>
+                    {% elif message.tags == 'warning' %}
+                        <div class="col-sm-12 alert alert-warning">
+                            <strong>{{ message }}</strong>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<hr class="featurette-divider">
+{% endblock content %}

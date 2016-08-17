@@ -1,4 +1,5 @@
 from django import forms
+from .models import ContactInfo
 
 
 def generate_attr(name):
@@ -6,7 +7,7 @@ def generate_attr(name):
 
 
 class UserCommentForm(forms.Form):
-    action = 'comment'
+    action = '/{0:s}/'.format(ContactInfo.url)
 
     name = forms.CharField(label="", widget=forms.TextInput(attrs=generate_attr('名字')), max_length=32)
     phone = forms.CharField(label="", widget=forms.TextInput(attrs=generate_attr('电话')), max_length=11)

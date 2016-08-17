@@ -2,109 +2,62 @@
 {% block content %}
 
 <style>
-.container-fluid {
+    .container-fluid {
     padding: 60px 50px;
-}
+    }
 
-.bg-grey {
+    .bg-grey {
     background-color: #f6f6f6;
-}
+    }
 
-.logo {
+    .logo {
     color: #f4511e;
     font-size: 200px;
-}
-
-@media screen and (max-width: 768px) {
-    .col-sm-4 {
-        text-align: center;
-        margin: 25px 0;
     }
-}
+
+    @media screen and (max-width: 768px) {
+    .col-sm-4 {
+    text-align: center;
+    margin: 25px 0;
+    }
+    }
 </style>
 
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-8">
-        <h1>{{ site.name }}</h1>
-        <p class="lead">{{ about_us.desc }}</p>
+    <div class="row">
+        <div class="col-lg-8">
+            <h1>{{ site.name }}</h1>
+            <p class="lead">{{ about_us.desc }}</p>
+        </div>
+        <div class="col-lg-4">
+            <img class="featurette-image img-responsive center-block" src="{{ about_us.logo.url }}" />
+        </div>
     </div>
-    <div class="col-lg-4">
-      <img class="featurette-image img-responsive center-block" src="{{ about_us.logo.url }}" />
-    </div>
-  </div>
 </div>
 
 <div class="container-fluid bg-grey">
-  <div class="row">
-    <div class="col-lg-4">
-      <span class="glyphicon glyphicon-globe logo"></span>
+    <div class="row">
+        <div class="col-lg-4">
+            <span class="glyphicon glyphicon-globe logo"></span>
+        </div>
+        <div class="col-lg-8">
+            <h1>我们的价值理念</h1>
+            <p class="lead">{{ about_us.value }}</p>
+        </div>
     </div>
-    <div class="col-lg-8">
-      <h1>我们的价值理念</h1>
-      <p class="lead">{{ about_us.value }}</p>
-    </div>
-  </div>
 </div>
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-8">
-        <h1>客户对我们的评价</h1>
-        <p class="lead">{{ about_us.comment }}</p>
+    <div class="row">
+        <div class="col-lg-8">
+            <h1>客户对我们的评价</h1>
+            <p class="lead">{{ about_us.comment }}</p>
+        </div>
+        <div class="col-lg-4">
+            <span class="glyphicon glyphicon-user logo"></span>
+        </div>
     </div>
-    <div class="col-lg-4">
-      <span class="glyphicon glyphicon-user logo"></span>
-    </div>
-  </div>
 </div>
-
-<div class="container-fluid bg-grey">
-  <h1 class="text-center">联系我们</h1>
-  <hr class="featurette-divider">
-  <div class="row">
-    <div class="col-sm-3">
-      <img class="featurette-image img-responsive center-block" height="170" width="170" src="{{ contact.qr_code.url }}" />
-    </div>
-    <div class="col-sm-4">
-      <p>联系我们，我们会在 24 小时之内联系您。</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span> {{ contact.address }}</p>
-      <p><span class="glyphicon glyphicon-phone"></span> {{ contact.phone }}</p>
-      <p><span class="glyphicon glyphicon-envelope"></span> {{ contact.email }}</p>
-      <p><span class="glyphicon glyphicon-qrcode"></span> {{ contact.wechat }}</p>
-    </div>
-    <div class="col-sm-5">
-      <form action="/{{ form.action }}"  method="post">
-          {% csrf_token %}
-          {{ form.non_field_errors }}
-        <div class="row">
-            <div class="col-sm-4 form-group">
-                {{ form.name.errors }}
-                {{ form.name }}
-            </div>
-            <div class="col-sm-4 form-group">
-                {{ form.phone.errors }}
-                {{ form.phone }}
-            </div>
-            <div class="col-sm-4 form-group">
-                {{ form.wechat.errors }}
-                {{ form.wechat }}
-            </div>
-      </div>
-
-       {{ form.comment.errors }}
-       {{ form.comment }}
-       <br>
-      <div class="row">
-          <div class="col-sm-12 form-group">
-            <button class="btn btn-default pull-right" type="submit">发送</button>
-            </div>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 <hr class="featurette-divider">
 {% endblock content %}

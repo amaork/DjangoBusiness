@@ -15,5 +15,10 @@ class ContactInfoAdmin(LimitInstanceAdmin):
     list_display = ['name', 'wechat', 'phone', 'email', 'address']
 
 
+class CommentMessageAdmin(admin.ModelAdmin):
+    list_display = ['sender', 'name', 'wechat', 'phone', 'comment']
+
+
 admin.site.register(CompanyInfo, CompanyInfoAdmin)
 admin.site.register(ContactInfo, ContactInfoAdmin)
+admin.site.register(CommentMessage, CommentMessageAdmin)
