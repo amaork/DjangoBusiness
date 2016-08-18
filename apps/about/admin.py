@@ -8,11 +8,13 @@ from .models import *
 class CompanyInfoAdmin(LimitInstanceAdmin):
     limit = 1
     list_display = ['name']
+    fields = ('name', 'desc', 'value', 'comment', 'logo', 'self_define_cover')
 
 
 class ContactInfoAdmin(LimitInstanceAdmin):
     limit = 1
     list_display = ['name', 'wechat', 'phone', 'email', 'address']
+    fields = ('name', 'phone', ('wechat', 'qr_code'), 'email', 'qq', 'weibo', 'address', 'self_define_cover')
 
 
 class CommentMessageAdmin(admin.ModelAdmin):

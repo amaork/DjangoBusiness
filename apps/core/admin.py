@@ -81,6 +81,7 @@ class NavigationBarAdmin(OrderedModelAdmin):
 
 
 class ProjectAdmin(LimitInstanceAdmin):
+    exclude = ['self_define_cover']
     list_display = ('name', 'phone', 'address')
 
 

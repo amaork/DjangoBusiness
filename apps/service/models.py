@@ -12,7 +12,7 @@ class ServiceItem(models.Model):
     desc = models.TextField('描述', max_length=256)
     detail = models.TextField('详情', max_length=1024)
     sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES)
-    ico = models.ForeignKey(Document, help_text='图标', blank=True, null=True)
+    ico = models.ForeignKey(Document, verbose_name='服务图标', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if len(Service.objects.all()) == 0:
@@ -23,5 +23,5 @@ class ServiceItem(models.Model):
 class Service(NavigationModel):
     url = 'service'
     text = '服务'
-    sequence = NavigationModel.auto_sequence()
+    sequence = 3
     slogan = models.CharField('服务宗旨', max_length=64, blank=True, null=True, default="")

@@ -13,14 +13,15 @@ class CompanyInfo(NavigationModel):
     公司信息
     """
     url = 'about'
-    text = "关于我们"
-    sequence = 1
+    text = "关于"
+    context_name = 'about_us'
+    sequence = NavigationModel.get_bottom_sequence()
 
     name = models.CharField('公司名称', max_length=32)
     desc = models.TextField('公司简介', max_length=512)
     value = models.TextField('价值理念', max_length=512)
     comment = models.TextField('用户评价', max_length=512)
-    logo = models.ForeignKey(Document, help_text='公司 LOGO', related_name='comp_logo', blank=True, null=True)
+    logo = models.ForeignKey(Document, verbose_name='公司 LOGO', related_name='comp_logo', blank=True, null=True)
 
 
 class ContactInfo(NavigationModel):
@@ -29,7 +30,8 @@ class ContactInfo(NavigationModel):
     """
     url = "contact_us"
     text = '联系我们'
-    sequence = 2
+    context_name = 'contact'
+    sequence = NavigationModel.get_bottom_sequence() - 1
 
     name = models.CharField('名称', max_length=32)
     phone = models.CharField('电话', max_length=64, default='')
@@ -38,7 +40,7 @@ class ContactInfo(NavigationModel):
     weibo = models.CharField('微薄', max_length=32, default='')
     wechat = models.CharField('微信', max_length=16,  default='')
     address = models.CharField('地址', max_length=128, default='')
-    qr_code = models.ForeignKey(Document, help_text='微信二维码', related_name='wechat', blank=True, null=True)
+    qr_code = models.ForeignKey(Document, verbose_name='微信二维码', related_name='wechat', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if len(Project.objects.all()):
@@ -62,7 +64,7 @@ class CommentMessage(models.Model):
     address = models.CharField('地址', max_length=64, default='', blank=True, null=True)
     comment = models.TextField('留言', max_length=128, default="")
     sender = models.CharField('类型', max_length=1, choices=SENDER_CHOICES, default='A')
-    avatar = models.ForeignKey(Document, help_text="头像", related_name='avatar', blank=True, null=True)
+    avatar = models.ForeignKey(Document, verbose_name="头像", related_name='avatar', blank=True, null=True)
 
     @staticmethod
     def add_user_comment(name, phone, wechat, comment):

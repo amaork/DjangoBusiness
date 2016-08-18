@@ -22,7 +22,7 @@ class VerticalItem(BasicItem):
 
     title2 = models.CharField('副标题', max_length=64, blank=True, null=True)
     sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES)
-    cover = models.ForeignKey(Document, help_text='文章的封面图标')
+    cover = models.ForeignKey(Document, verbose_name='封面图标')
 
 
 class HorizontalItem(BasicItem):
@@ -34,4 +34,4 @@ class HorizontalItem(BasicItem):
 
     context = models.TextField('正文', help_text='文章的正文内容')
     sequence = models.CharField('顺序', max_length=1, choices=SEQ_CHOICES)
-    cover = models.ForeignKey(Document, help_text='文章的封面图标')
+    cover = models.ForeignKey(Document, verbose_name='文章的封面图标')

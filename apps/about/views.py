@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 
 from .forms import UserCommentForm
-from ..core.models import Project, NavigationBar
+from ..core.models import NavigationModel
 from .models import CompanyInfo, ContactInfo, CommentMessage
 
 
@@ -14,15 +14,7 @@ def about(request):
     :param request:
     :return:
     """
-    site = get_object_or_404(Project)
-    about_us = get_object_or_404(CompanyInfo)
-    navigation_list = NavigationBar.objects.all().order_by('sequence')
-    context = {
-        'site': site,
-        'about_us': about_us,
-        'location': CompanyInfo.url,
-        'navigation_list': navigation_list,
-    }
+    context = NavigationModel.get_navigation_context(CompanyInfo)
     return render(request, 'about/about.html', context)
 
 
@@ -51,14 +43,7 @@ def contact_us(request):
     else:
         form = UserCommentForm()
 
-    site = get_object_or_404(Project)
-    contact = get_object_or_404(ContactInfo)
-    navigation_list = NavigationBar.objects.all().order_by('sequence')
-    context = {
-        'form': form,
-        'site': site,
-        'contact': contact,
-        'location': ContactInfo.url,
-        'navigation_list': navigation_list,
-    }
+    context = NavigationModel.get_navigation_context(ContactInfo)
+    context['form'] = form
+
     return render(request, 'about/contact_us.html', context)
