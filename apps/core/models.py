@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.signals import pre_delete, pre_save
+from django.dispatch.dispatcher import receiver
+# from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
 from django.db import models
 import string
+import os
 
 __all__ = ['NavigationModel', 'Project', 'Document', 'NavigationBar', 'get_sequence_choices']
 
@@ -77,17 +81,23 @@ class Document(models.Model):
     """
     文件 Model 负责上传存储各种类型的文件数据
     """
-    name = models.CharField(max_length=32)
-    docfile = models.FileField(upload_to="documents/%Y/%m/%d")
+    PATH_FORMAT = "documents/%Y/%m/%d"
+
+    name = models.CharField(max_length=32, unique=True)
+    file = models.FileField(upload_to=PATH_FORMAT)
 
     def __str__(self):
         return self.name
 
     def url(self):
-        return self.docfile.url
+        return self.file.url
 
     def file_path(self):
-        return self.docfile.name
+        return self.file.name
+
+    @staticmethod
+    def get_upload_path():
+        return timezone.now().strftime(Document.PATH_FORMAT)
 
 
 class NavigationBar(models.Model):
@@ -103,3 +113,32 @@ class NavigationBar(models.Model):
 
     def __str__(self):
         return self.text
+
+
+@receiver(pre_delete, sender=Document)
+def delete_document(sender, instance, **kwargs):
+    if not isinstance(instance, Document):
+        return
+
+    if instance.file and os.path.isfile(instance.file.path):
+        os.remove(instance.file.path)
+
+
+@receiver(pre_save, sender=Document)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    if not isinstance(instance, Document):
+        return False
+
+    if not instance.pk:
+        return False
+
+    try:
+
+        new = instance.file
+        old = Document.objects.get(pk=instance.pk).file
+
+        # New file and old file is not sameone
+        if (not (old == new)) and os.path.isfile(old.path):
+            os.remove(old.path)
+    except Document.DoesNotExist:
+        return False
