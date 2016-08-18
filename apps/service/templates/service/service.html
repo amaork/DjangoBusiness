@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .jumbotron {
+        background-color: #fffff; /* Orange */
+        <!--color: #ffffff;-->
+    }
+    .container-fluid {
+    padding: 60px 50px;
+    }
+
+    .bg-grey {
+    background-color: #f6f6f6;
+    }
+
+    .logo {
+    color: #f4511e;
+    font-size: 200px;
+    }
+
+    @media screen and (max-width: 768px) {
+    .col-sm-4 {
+    text-align: center;
+    margin: 25px 0;
+    }
+    }
+</style>
+
+ <!--<div class="jumbotron text-center" >-->
+     <!--<h1>服务项目</h1>-->
+     <!--<p>让您满意是我们的宗旨</p>-->
+ <!--</div>-->
+
+<div class="container-fluid">
+    {% for service in services %}
+        {% if service.sequence|divisibleby:2 == 1 %}
+        <div class="container-fluid bg-grey">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1>{{ service.name }}</h1>
+                    <p class="lead">{{ service.desc }}</p>
+                </div>
+                <div class="col-lg-4">
+                    <img class="featurette-image img-responsive center-block" src="{{ service.ico.url }}" />
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <img class="featurette-image img-responsive center-block" src="{{ service.ico.url }}" />
+                </div>
+                <div class="col-lg-8">
+                    <h1>{{ service.name }}</h1>
+                    <p class="lead">{{ service.desc }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<hr class="featurette-divider">
+{% endblock content %}

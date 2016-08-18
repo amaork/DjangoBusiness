@@ -26,6 +26,10 @@ class NavigationModel(models.Model):
     text = ""
     sequence = -1
 
+    @staticmethod
+    def auto_sequence():
+        return len(NavigationBar.objects.all()) + 1
+
     def save(self, *args, **kwargs):
         if len(self.text) and len(self.url) and self.sequence != -1:
             if not NavigationBar.objects.filter(url=self.url, text=self.text):
