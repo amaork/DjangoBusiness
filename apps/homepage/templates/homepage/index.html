@@ -1,52 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
- <!-- Three columns of text below the carousel -->
-      <div class="row">
-        {% for item in horizontal_list %}
-          <div class="col-lg-4">
-          <img class="img-circle" src="{{ item.cover.url }}" alt="Generic placeholder image" width="140" height="140">
-          <h2>{{ item.title }}</h2>
-          <p>{{ item.abstract }}</p>
-          <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        {% endfor %}
-      </div><!-- /.row -->
+<div class="row">
+    {% for item in horizontal_list %}
+    <div class="col-lg-4">
+        <img class="img-circle" src="{{ item.cover.url }}" alt="Generic placeholder image" width="140" height="140">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.abstract }}</p>
+        <p><a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a></p>
+    </div><!-- /.col-lg-4 -->
+    {% endfor %}
+</div><!-- /.row -->
 
-      <!-- START THE FEATURETTES -->
+<hr class="featurette-divider">
 
-      <hr class="featurette-divider">
-
-      {% for article in vertical_list %}
-        {% if article.sequence|divisibleby:2 == 1 %}
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">{{ article.title }}<span class="text-muted">{{ article.title2 }}</span></h2>
-            <p class="lead">{{ article.abstract }}</p>
-          </div>
-
-          <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" src="{{ article.cover.url }}" alt="Generic placeholder image">
-          </div>
+{% for article in vertical_list %}
+    {% if article.sequence|divisibleby:2 == 1 %}
+    <div class="container-fluid bg-grey">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>{{ article.title }}</h1>
+                <p class="lead">{{ article.abstract }}<a class="btn btn-default btn-xs" href="#" role="button">查看详情 &raquo;</a></p>
+            </div>
+            <div class="col-md-5 crea-card">
+                <img class="featurette-image img-responsive center-block" src="{{ article.cover.url }}" />
+            </div>
         </div>
-
-        {% else %}
-
-        <div class="row featurette">
-          <div class="col-md-7 col-md-push-5">
-            <h2 class="featurette-heading">{{ article.title }}<span class="text-muted">{{ article.title2 }}</span></h2>
-            <p class="lead">{{ article.abstract }}</p>
-          </div>
-
-          <div class="col-md-5 col-md-pull-7">
-            <img class="featurette-image img-responsive center-block" src="{{ article.cover.url }}" alt="Generic placeholder image">
-          </div>
+    </div>
+    {% else %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive center-block" src="{{ article.cover.url }}" />
+            </div>
+            <div class="col-md-7">
+                <h1>{{  article.title }}</h1>
+                <p class="lead">{{ article.abstract }}<a class="btn btn-default btn-xs" href="#" role="button">查看详情 &raquo;</a></p>
+            </div>
         </div>
+    </div>
+   {% endif %}
 
-        {% endif %}
-
-        <hr class="featurette-divider">
-
-      {% endfor %}
-
+<hr class="featurette-divider">
+{% endfor %}
 {% endblock content %}

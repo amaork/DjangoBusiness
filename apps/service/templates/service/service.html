@@ -7,7 +7,7 @@
         <!--color: #ffffff;-->
     }
     .container-fluid {
-    padding: 60px 50px;
+    padding: -10px 50px;
     }
 
     .bg-grey {
@@ -27,19 +27,19 @@
     }
 </style>
 
- <!--<div class="jumbotron text-center" >-->
-     <!--<h1>服务项目</h1>-->
-     <!--<p>让您满意是我们的宗旨</p>-->
- <!--</div>-->
-
 <div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron text-center" >
+             <h1>服务项目</h1>
+        <p>让您满意是我们的宗旨</p>
+    </div>
     {% for service in services %}
         {% if service.sequence|divisibleby:2 == 1 %}
         <div class="container-fluid bg-grey">
             <div class="row">
                 <div class="col-lg-8">
                     <h1>{{ service.name }}</h1>
-                    <p class="lead">{{ service.desc }}</p>
+                    <p class="lead">{{ service.desc }}<a class="btn btn-default btn-xs" href="#" role="button">了解更多 &raquo;</a></p>
                 </div>
                 <div class="col-lg-4">
                     <img class="featurette-image img-responsive center-block" src="{{ service.ico.url }}" />
@@ -54,12 +54,13 @@
                 </div>
                 <div class="col-lg-8">
                     <h1>{{ service.name }}</h1>
-                    <p class="lead">{{ service.desc }}</p>
+                    <p class="lead">{{ service.desc }}<a class="btn btn-default btn-xs" href="#" role="button">了解更多 &raquo;</a></p>
                 </div>
             </div>
         </div>
         {% endif %}
     {% endfor %}
+    </div>
 </div>
 <hr class="featurette-divider">
 {% endblock content %}
